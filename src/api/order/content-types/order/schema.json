@@ -18,8 +18,14 @@
     "userName": {
       "type": "string"
     },
-    "stripeSessionId": {
+    "order": {
       "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "stripeId": {
+      "type": "text"
     }
   }
 }

@@ -1,5 +1,5 @@
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 "use strict";
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 /**
  * order controller
@@ -36,18 +36,18 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
         payment_method_types: ["card"],
         customer_email: email,
         mode: "payment",
-        success_url: "http://localhost:2001/checkout/success",
-        cancel_url: "http://localhost:2001",
+        success_url: "http://localhost:3000/checkout/success",
+        cancel_url: "http://localhost:3000",
         line_items: lineItems,
       });
 
       // create the item
       await strapi
         .service("api::order.order")
-        .create({ data: { userName, products, stripeSessionId: session.id } });
+        .create({ data: { userName, products, stripeId: session.id  } });
 
       // return the session id
-      return { id: session.id };
+      return {  id: session.id };
     } catch (error) {
       ctx.response.status = 500;
       return { error: { message: "There was a problem creating the charge" } };
